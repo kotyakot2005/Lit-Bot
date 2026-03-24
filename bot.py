@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import os
 
 import telebot
 from telebot import types
 import random
+import os
+import time
 
 # =====================================================
-# ⚠️ ВСТАВЬТЕ СВОЙ ТОКЕН В КАВЫЧКАХ НИЖЕ ⚠️
+# ТОКЕН ИЗ ПЕРЕМЕННОЙ ОКРУЖЕНИЯ
 # =====================================================
-TOKEN = "8669522322:AAG3fE76zlQAwGBbyP1drhZz4usxKXaLt0g"
-# =====================================================
+TOKEN = os.environ.get("TELEGRAM_TOKEN")
+
+# Проверка, что токен есть
+if not TOKEN:
+    print("❌ ОШИБКА: Не найден токен TELEGRAM_TOKEN")
+    print("Добавьте переменную окружения TELEGRAM_TOKEN на Render")
+    exit(1)
+
+print(f"✅ Токен загружен (первые 5 символов: {TOKEN[:5]}...)")
 
 bot = telebot.TeleBot(TOKEN)
 
