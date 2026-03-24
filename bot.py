@@ -993,6 +993,24 @@ def handle_text_answer(message):
     
     test_data["current"] += 1
     send_next_question(message.chat.id)
+# Для Render Web Service - открываем порт, чтобы сервис не падал
+from threading import Thread
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'OK')
+
+def run_health_server():
+    port = int(os.environ.get("PORT", 10000))
+    server = HTTPServer(('0.0.0.0', port), HealthCheckHandler)
+    server.serve_forever()
+
+# Запускаем health-сервер в отдельном потоке
+Thread(target=run_health_server, daemon=True).start()
+print(f"✅ Health server запущен на порту {os.environ.get('PORT', 10000)}")
 # ==================== ЗАПУСК ====================
 if __name__ == "__main__":
     print("=" * 50)
