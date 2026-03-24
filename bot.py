@@ -13,11 +13,7 @@ TOKEN = "8669522322:AAG3fE76zlQAwGBbyP1drhZz4usxKXaLt0g"
 # =====================================================
 
 bot = telebot.TeleBot(TOKEN)
-# Прокси (нужно найти рабочий)
-telebot.apihelper.proxy = {
-    'http': 'http://33.139.34.153:443',
-    'https': 'http://qq.aezailoveyou.ru:443'
-}
+
 
 
 # ==================== ВСЕ ПРОИЗВЕДЕНИЯ ====================
